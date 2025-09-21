@@ -3,11 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Виктор и Людмила — 14.02.2026</title>
-  <meta name="description" content="Приглашение на свадьбу Виктора и Людмилы. 14 февраля 2026, кафе «Флагман», г. Темников." />
+  <title>Виктор и Людмила</title>
+  <meta name="description" content="Приглащают Вас на свою свадьбу" />
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="futor.jpg"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@300;400;600;700&family=Lato:wght@300;400&family=Love+Ya+Like+A+Sister&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Cg fill="none" stroke="%23b86b77" stroke-width="4"%3E%3Ccircle cx="24" cy="38" r="14"/%3E%3Ccircle cx="44" cy="30" r="14"/%3E%3C/g%3E%3Cpath d="M31 10h12l-6 6z" fill="%23b86b77"/%3E%3C/svg%3E'>
     <!-- Стили -->
   <link rel="stylesheet" href="style.css">
@@ -19,7 +21,6 @@
     <div class="hero__bg" aria-hidden="true"><img src="futor.jpg" alt="Обложка"/></div>
     <div class="hero__content">
       <h1 class="hero__names">Виктор &amp; Людмила</h1>
-      <p class="subtitle" style="color:#fff">Мы будем рады разделить этот день с вами</p>
       <span class="hero__date">14 февраля 2026</span>
     </div>
   </section>
@@ -27,7 +28,7 @@
   <!-- Приглашение, календарь и таймер -->
   <section id="calendar" aria-label="Приглашение и дата">
     <div class="container">
-      <h2 class="invite__title">ДОРОГИЕ ГОСТИ!</h2>
+      <h2 class="invite__title">Дорогие гости!</h2>
       <p class="invite__text">С большой радостью приглашаем Вас на наш первый семейный праздник — нашу свадьбу! Мы очень хотим, чтобы в этот день с нами рядом были наши самые близкие люди.</p>
       <div class="divider" aria-hidden="true"></div>
 
@@ -166,25 +167,22 @@
   <!-- Локации -->
   <section id="location">
     <div class="container places">
-      <h2 class="title">Локации</h2>
-      <p class="subtitle">Вы можете добраться до банкетного зала самостоятельно или воспользоваться трансфером от домов жениха и невесты.</p>
+      <h2 class="title">Локация</h2>
+      
+      <!-- Описание и фото зала -->
+      <div class="hall-info-section">
+        <h3 class="hall-info__title">Банкетный зал «Флагман»</h3>
+        <p class="hall-info__text">Наша свадьба состоится в уютном банкетном зале <strong>«Флагман»</strong>, который находится по адресу <span class="copyable location__address" id="address" data-copy="г. Темников, ул. Коммунистическая, 5/1">г. Темников, ул. Коммунистическая, 5/1</span></p>
+        <div class="hall-photo">
+          <img src="hall.jpg" alt="Банкетный зал Флагман" />
+        </div>
+      </div>
 
-      <div class="place-cards">
-        <div class="place">
-          <h3>Дом жениха</h3>
-          <p class="location__text">Адрес: <span class="copyable" id="addr-g" data-copy="с. Атюрьево, ул. Октябрьская, 1">с. Атюрьево, ул. Октябрьская, 1</span></p>
-          <div id="map-groom" class="map" aria-label="Карта: дом жениха"></div>
-        </div>
-        <div class="place">
-          <h3>Дом невесты</h3>
-          <p class="location__text">Адрес: <span class="copyable" id="addr-b" data-copy="с. Атюрьево, ул. Комсомольская, 50">с. Атюрьево, ул. Комсомольская, 50</span></p>
-          <div id="map-bride" class="map" aria-label="Карта: дом невесты"></div>
-        </div>
-        <div class="place">
-          <h3>Банкетный зал «Флагман»</h3>
-          <p class="location__text">Адрес: <span class="copyable" id="address" data-copy="г. Темников, ул. Коммунистическая, 5/1">г. Темников, ул. Коммунистическая, 5/1</span></p>
-          <div id="map-hall" class="map" aria-label="Карта: банкетный зал"></div>
-        </div>
+      <!-- Как добраться с картой -->
+      <div class="transport-section">
+        <h3 class="transport__title">Как добраться</h3>
+        <p class="transport__text">Мы подготовили для вас карту с точным расположением зала, а также организуем трансфер от домов жениха и невесты для вашего удобства. Подробности уточняйте у нас лично.</p>
+        <div id="map-hall" class="map" aria-label="Карта: банкетный зал"></div>
       </div>
     </div>
   </section>

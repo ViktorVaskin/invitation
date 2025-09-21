@@ -1,3 +1,17 @@
+@font-face {
+  font-family: 'PlayfairDisplaySC';
+  src: url('PlayfairDisplaySC-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Alexander';
+  src: url('Alexander.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root{
   --bg:#fff7f2; --fg:#2a2a2a; --muted:#6f6f6f;
   --brand:#b86b77; --card:#ffffff;
@@ -31,7 +45,8 @@ html,body{
 
   /* Остальное — как было */
   color: var(--fg);
-  font-family: Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-family: "PlayfairDisplaySC",serif;
+  font-style: italic;
   -webkit-text-size-adjust:100%;
   text-size-adjust:100%;
   scroll-behavior:smooth;
@@ -43,10 +58,10 @@ section{padding:56px 16px} /* компактнее на мобилках */
 .container{width:100%;max-width:1080px;margin:0 auto}
 
 .title{
-  font-family:"Playfair Display",serif;font-weight:700;
-  font-size:clamp(24px,7vw,52px);line-height:1.15;margin:0 0 12px
+  font-family:"PlayfairDisplaySC",serif;font-weight:normal;
+  font-size:clamp(24px,7vw,52px);line-height:1.15;margin:0 0 12px;font-style:italic
 }
-.subtitle{font-size:clamp(15px,4vw,20px);color:var(--muted);margin:0 0 24px}
+.subtitle{font-size:clamp(15px,4vw,20px);color:var(--muted);margin:0 0 24px;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-style:normal}
 
 /* ---------- Обложка ---------- */
 .hero{position:relative;min-height:100svh;display:grid;place-items:center;padding:0}
@@ -58,21 +73,17 @@ section{padding:56px 16px} /* компактнее на мобилках */
 }
 .is-hero-loaded .hero__bg img{opacity:1;transform:scale(1)}
 .hero__content{position:relative;color:#faf0e6;padding:20px;z-index: 2;}
-.hero__names{font-family:"Playfair Display",serif;font-size:clamp(32px,12vw,80px);font-weight:700;margin:0 0 8px}
-.hero__date{display:inline-block;margin-top:12px;padding:8px 14px;border-radius:999px;background:rgba(0,0,0,.35);backdrop-filter:blur(4px);font-weight:600}
+.hero__names{font-family:"PlayfairDisplaySC",serif;font-size:clamp(40px,12vw,100px);font-weight:normal;margin:0 0 200px;letter-spacing:0.02em;opacity:0.95;font-style:italic}
+.hero__date{font-family:"PlayfairDisplaySC",serif;font-size:clamp(32px,10vw,75px);font-weight:normal;margin:0;letter-spacing:0.08em;opacity:0.85;font-style:italic}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.25) 35%,rgba(0,0,0,.45));pointer-events:none;z-index: 1;}
-/* на очень узких экранах — центрируем текст без сдвига «вниз» */
-@media (max-width:420px){
-  .hero__content{top:auto;transform:none}
-}
 
 /* ---------- Приглашение + календарь + таймер ---------- */
 #calendar{min-height:100svh;display:flex;align-items:center}
 .invite__title{
-  font-family:"Playfair Display",serif;font-weight:700;letter-spacing:.12em;
-  text-transform:uppercase;font-size:clamp(22px,6.5vw,48px);margin:0 0 12px
+  font-family:"PlayfairDisplaySC",serif;font-weight:normal;letter-spacing:.12em;
+  text-transform:none;font-size:clamp(22px,6.5vw,48px);margin:0 0 12px;font-style:italic
 }
-.invite__text{max-width:760px;margin:0 auto 18px;color:var(--muted)}
+.invite__text{font-family:"Alexander",cursive;max-width:760px;margin:0 auto 18px;color:var(--muted);font-size:clamp(14px,3.5vw,26px);font-style:normal}
 .divider{width:1px;height:56px;background:linear-gradient(var(--muted),transparent);opacity:.35;margin:16px auto 20px}
 
 /* Мини-календарь — пиксельное совпадение заголовков и чисел, центр */
@@ -80,18 +91,18 @@ section{padding:56px 16px} /* компактнее на мобилках */
   --sz: clamp(32px, 10vw, 46px);
   display:grid;gap:10px;margin:0 auto 28px;width:fit-content;justify-items:center
 }
-.mini-cal__header{font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--fg)}
+.mini-cal__header{font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--fg);font-style:normal}
 .mini-cal__dow-grid,.mini-cal__num-grid{
   display:grid;grid-template-columns:repeat(7,var(--sz));gap:8px;justify-content:center
 }
 .mini-cal__dow{
   display:flex;align-items:center;justify-content:center;
   width:var(--sz);height:var(--sz);font-size:12px;font-weight:600;
-  color:var(--fg);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap
+  color:var(--fg);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;font-style:normal
 }
 .mini-cal__cell{
   width:var(--sz);height:var(--sz);display:flex;align-items:center;justify-content:center;
-  border:1px solid rgba(0,0,0,.08);border-radius:10px;background:transparent;font-weight:600
+  border:1px solid rgba(0,0,0,.08);border-radius:10px;background:transparent;font-weight:600;font-style:normal
 }
 .mini-cal__cell--empty{border-color:transparent}
 .mini-cal__cell--mark{border:2px solid var(--brand);color:var(--brand);position:relative}
@@ -100,17 +111,17 @@ section{padding:56px 16px} /* компактнее на мобилках */
 }
 
 /* Таймер — одна строка на мобилках, мягкая типографика */
-.countdown__title{font-family:"Playfair Display",serif;letter-spacing:.12em;text-transform:uppercase;margin:24px 0 6px}
+.countdown__title{font-family:"PlayfairDisplaySC",serif;letter-spacing:.12em;text-transform:uppercase;margin:24px 0 6px;font-style:italic}
 .cd-numbers{
   display:flex;gap:clamp(14px,6vw,28px);justify-content:center;align-items:flex-end;flex-wrap:nowrap
 }
 .cd-box{text-align:center;min-width:72px}
-.cd-num{font-size:clamp(34px,12vw,90px);font-weight:500;line-height:1}
-.cd-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+.cd-num{font-size:clamp(34px,12vw,90px);font-weight:500;line-height:1;font-style:normal}
+.cd-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px;font-style:normal}
 
 /* ---------- План мероприятия (вертикальный) ---------- */
 .program-list{display:grid;gap:16px;max-width:720px;margin:28px auto 0;text-align:left;padding:0 2px}
-.program-item{background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow);display:flex;align-items:flex-start;gap:12px}
+.program-item{background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow);display:flex;align-items:flex-start;gap:12px;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-style:normal}
 .program-icon{flex:0 0 40px;width:clamp(32px,10vw,48px);height:clamp(32px,10vw,48px);color:var(--fg)}
 .program-icon path,.program-icon rect,.program-icon circle{stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .program-text{font-size:clamp(16px,4.3vw,22px);font-weight:600;line-height:1.35}
@@ -119,40 +130,101 @@ section{padding:56px 16px} /* компактнее на мобилках */
 .program-note{color:var(--muted);font-size:13px;margin-top:6px}
 
 /* Локации */
-.places{display:grid;gap:16px;max-width:980px;margin:0 auto}
+.places{display:grid;gap:24px;max-width:980px;margin:0 auto}
 
-/* === FORCE: карты только 1 или 3, без 2-х колонок === */
-.place-cards{
-  display:grid;
-  grid-auto-flow: row;
-  grid-template-columns: 1fr !important;      /* по умолчанию: одна колонка */
-  gap: 16px;
+/* Секция с информацией о зале */
+.hall-info-section{
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  text-align: center;
+  font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-style: normal;
 }
 
-/* только на очень широких экранах — ровно 3 в ряд */
-@media (min-width: 1280px){
-  .place-cards{
-    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
-  }
+.hall-info__title{
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: clamp(20px, 5vw, 28px);
+  margin: 0 0 16px;
+  color: var(--fg);
 }
 
-/* карточки и карты как были */
-.place{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
-.place h3{margin:6px 0 8px}
-.location__text{margin-bottom:12px}
+.hall-info__text{
+  font-size: clamp(15px, 4vw, 18px);
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0 0 20px;
+}
+
+.hall-photo{
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.hall-photo img{
+  width: 100%;
+  height: auto;
+  display: block;
+  min-height: clamp(200px, 30vh, 300px);
+  object-fit: cover;
+}
+
 .map{
   width:100%;
-  margin:0 auto;
+  margin:16px auto 0;
   min-height:clamp(220px,38vh,420px);
   border-radius:12px;
   overflow:hidden;
   box-shadow:var(--shadow);
 }
 
+/* Кликабельный адрес */
+.location__address{
+  color: var(--brand);
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-weight: 500;
+}
+.location__address:hover{
+  color: var(--fg);
+  text-decoration: none;
+}
+
+/* Секция "Как добраться" */
+.transport-section{
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin-top: 16px;
+  text-align: center;
+  font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-style: normal;
+}
+.transport__title{
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: clamp(18px, 4vw, 24px);
+  margin: 0 0 12px;
+  color: var(--fg);
+}
+.transport__text{
+  font-size: clamp(14px, 3.5vw, 16px);
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0;
+}
+
 
 /* ---------- Контакты ---------- */
 .contacts__grid{display:grid;grid-template-columns:1fr;gap:12px;justify-items:stretch}
-.contact{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
+.contact{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-style:normal}
+.contact h3{font-family:"Playfair Display",serif;font-weight:700}
 
 /* ---------- Тост ---------- */
 .toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--fg);color:#fff;padding:10px 14px;border-radius:999px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .25s ease}
@@ -165,7 +237,6 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
 @media (min-width:600px){
   section{padding:64px 18px}
   .mini-cal{--sz: clamp(36px,7vw,48px)}
-  .place-cards{grid-template-columns:repeat(2,1fr);gap:16px}
   .contacts__grid{grid-template-columns:repeat(2,1fr);gap:16px;justify-items:center}
   .contact{max-width:380px;width:100%}
 }
@@ -173,7 +244,6 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
 /* ====== Экраны ≥960px (десктоп) ====== */
 @media (min-width:960px){
   section{padding:72px 24px}
-  .place-cards{grid-template-columns:repeat(3,1fr)}
   .mini-cal{--sz: 46px}
   .cd-numbers{gap:clamp(28px,5vw,72px)}
 }
@@ -192,6 +262,8 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   display:flex;
   align-items:flex-start;
   gap:12px;
+  font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-style:normal;
 }
 .details-icon{
   flex:0 0 36px;
@@ -261,14 +333,20 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
 #program .title,
 #details .title {
   color: #faf0e6; /* как на обложке */
+  font-family:"PlayfairDisplaySC",serif;
+  font-style:italic;
 }
 #details .details-text {
   color: var(--fg); /* тёмный основной цвет текста */
+  font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-style:normal;
 }
 #program .program-text,
 #program .program-time-note,
 #program .program-note {
   color: var(--fg);
+  font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-style:normal;
 }
 
 

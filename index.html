@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Виктор и Людмила — 14.02.2026</title>
+  <meta name="description" content="Приглашение на свадьбу Виктора и Людмилы. 14 февраля 2026, кафе «Флагман», г. Темников." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Cg fill="none" stroke="%23b86b77" stroke-width="4"%3E%3Ccircle cx="24" cy="38" r="14"/%3E%3Ccircle cx="44" cy="30" r="14"/%3E%3C/g%3E%3Cpath d="M31 10h12l-6 6z" fill="%23b86b77"/%3E%3C/svg%3E'>
+    <!-- Стили -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Обложка -->
+  <section id="cover" class="hero" aria-label="Обложка">
+    <div class="hero__bg" aria-hidden="true"><img src="futor.jpg" alt="Обложка"/></div>
+    <div class="hero__content">
+      <h1 class="hero__names">Виктор &amp; Людмила</h1>
+      <p class="subtitle" style="color:#fff">Мы будем рады разделить этот день с вами</p>
+      <span class="hero__date">14 февраля 2026</span>
+    </div>
+  </section>
+
+  <!-- Приглашение, календарь и таймер -->
+  <section id="calendar" aria-label="Приглашение и дата">
+    <div class="container">
+      <h2 class="invite__title">ДОРОГИЕ ГОСТИ!</h2>
+      <p class="invite__text">С большой радостью приглашаем Вас на наш первый семейный праздник — нашу свадьбу! Мы очень хотим, чтобы в этот день с нами рядом были наши самые близкие люди.</p>
+      <div class="divider" aria-hidden="true"></div>
+
+      <div class="mini-cal" role="group" aria-label="Мини-календарь: Февраль 2026">
+        <div class="mini-cal__header">Февраль 2026</div>
+
+        <div class="mini-cal__dow-grid" aria-hidden="true">
+          <div class="mini-cal__dow">Пн</div>
+          <div class="mini-cal__dow">Вт</div>
+          <div class="mini-cal__dow">Ср</div>
+          <div class="mini-cal__dow">Чт</div>
+          <div class="mini-cal__dow">Пт</div>
+          <div class="mini-cal__dow">Сб</div>
+          <div class="mini-cal__dow">Вс</div>
+        </div>
+
+        <div class="mini-cal__num-grid" role="grid">
+          <!-- пустые до воскресенья (Пн–Сб) -->
+          <div class="mini-cal__cell mini-cal__cell--empty"></div>
+          <div class="mini-cal__cell mini-cal__cell--empty"></div>
+          <div class="mini-cal__cell mini-cal__cell--empty"></div>
+          <div class="mini-cal__cell mini-cal__cell--empty"></div>
+          <div class="mini-cal__cell mini-cal__cell--empty"></div>
+          <div class="mini-cal__cell mini-cal__cell--empty"></div>
+          <!-- 1 (Вс) -->
+          <div class="mini-cal__cell"><span>1</span></div>
+          <!-- 2–7 -->
+          <div class="mini-cal__cell"><span>2</span></div>
+          <div class="mini-cal__cell"><span>3</span></div>
+          <div class="mini-cal__cell"><span>4</span></div>
+          <div class="mini-cal__cell"><span>5</span></div>
+          <div class="mini-cal__cell"><span>6</span></div>
+          <div class="mini-cal__cell"><span>7</span></div>
+          <!-- 8–14 -->
+          <div class="mini-cal__cell"><span>8</span></div>
+          <div class="mini-cal__cell"><span>9</span></div>
+          <div class="mini-cal__cell"><span>10</span></div>
+          <div class="mini-cal__cell"><span>11</span></div>
+          <div class="mini-cal__cell"><span>12</span></div>
+          <div class="mini-cal__cell"><span>13</span></div>
+          <div class="mini-cal__cell mini-cal__cell--mark" aria-label="День свадьбы: 14 февраля 2026"><span>14</span></div>
+          <!-- 15–21 -->
+          <div class="mini-cal__cell"><span>15</span></div>
+          <div class="mini-cal__cell"><span>16</span></div>
+          <div class="mini-cal__cell"><span>17</span></div>
+          <div class="mini-cal__cell"><span>18</span></div>
+          <div class="mini-cal__cell"><span>19</span></div>
+          <div class="mini-cal__cell"><span>20</span></div>
+          <div class="mini-cal__cell"><span>21</span></div>
+          <!-- 22–28 -->
+          <div class="mini-cal__cell"><span>22</span></div>
+          <div class="mini-cal__cell"><span>23</span></div>
+          <div class="mini-cal__cell"><span>24</span></div>
+          <div class="mini-cal__cell"><span>25</span></div>
+          <div class="mini-cal__cell"><span>26</span></div>
+          <div class="mini-cal__cell"><span>27</span></div>
+          <div class="mini-cal__cell"><span>28</span></div>
+        </div>
+      </div>
+      <div class="divider" aria-hidden="true"></div>
+      <h3 class="countdown__title">ДО СВАДЬБЫ ОСТАЛОСЬ</h3>
+      <div class="cd-numbers" aria-label="Таймер до свадьбы">
+        <div class="cd-box"><div class="cd-num" id="cd-days">0</div><div class="cd-label">дней</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">часов</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-mins">00</div><div class="cd-label">минут</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-secs">00</div><div class="cd-label">секунд</div></div>
+      </div>
+      <!-- дата/время под таймером убраны -->
+    </div>
+  </section>
+
+<!-- План мероприятия -->
+<section class="parallax parallax--rip" id="program">
+<div class="parallax__img" style="--img:url('futor.jpg')"></div>
+<div class="parallax__content">
+  <div class="container">
+    <h2 class="title">План мероприятия</h2>
+    <div class="program-list">
+
+      <div class="program-item">
+        <svg class="program-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <!-- pin -->
+          <path d="M12 22s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11z" fill="none"/>
+          <!-- heart -->
+          <path d="M12 9.6c-.9-1.1-2.6-.9-3.2.4-.3.7-.2 1.6.3 2.1l2.9 2.7 2.9-2.7c.5-.5.6-1.4.3-2.1-.6-1.3-2.3-1.5-3.2-.4z" fill="none"/>
+        </svg>
+        <div class="program-text">
+          Сбор гостей <span class="program-time-note">— <em>время уточняется</em></span>
+          <div class="program-note">Объятия, улыбки, первый бокал и фотографии на память.</div>
+        </div>
+      </div>
+
+      <!-- Начало банкета -->
+      <div class="program-item">
+        <svg class="program-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <!-- пар -->
+          <path d="M7.5 6.5c.8-1 .8-2.1 0-3.1M12 6.5c.8-1 .8-2.1 0-3.1M16.5 6.5c.8-1 .8-2.1 0-3.1" fill="none"/>
+          <!-- колпак -->
+          <path d="M5 15a7 7 0 0 1 14 0" fill="none"/>
+          <!-- ручка -->
+          <path d="M12 8.5v-1" fill="none"/>
+          <!-- поднос -->
+          <path d="M3.5 15.5h17" fill="none"/>
+        </svg>
+        <div class="program-text">
+          Начало банкета <span class="program-time-note">— <em>время уточняется</em></span>
+          <div class="program-note">Тёплые тосты, вкусный ужин и море улыбок.</div>
+        </div>
+      </div>
+
+      <!-- Окончание банкета -->
+      <div class="program-item">
+        <svg class="program-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <!-- подвес -->
+          <path d="M12 3l0 2 6 4" fill="none"/>
+          <!-- табличка -->
+          <rect x="5" y="9" width="14" height="9" rx="1.8" ry="1.8" fill="none"/>
+          <!-- сердечки по бокам -->
+          <path d="M7.2 12.2c-.45-.55-1.3-.45-1.6.2-.15.35-.1.8.15 1.05l1.45 1.35 1.45-1.35c.25-.25.3-.7.15-1.05-.3-.65-1.15-.75-1.6-.2z" fill="none"/>
+          <path d="M17.8 12.2c-.45-.55-1.3-.45-1.6.2-.15.35-.1.8.15 1.05l1.45 1.35 1.45-1.35c.25-.25.3-.7.15-1.05-.3-.65-1.15-.75-1.6-.2z" fill="none"/>
+          <!-- текст как линии (минимализм, без зависимости от шрифта) -->
+          <path d="M8.3 12.5h1.8M11 12.5h1.9M13.9 12.5h1.8" fill="none"/>
+          <path d="M7.2 14.5h3.2M10.9 14.5h6" fill="none"/>
+        </svg>
+        <div class="program-text">
+          Окончание банкета <span class="program-time-note">— <em>время уточняется</em></span>
+          <div class="program-note">Общие фото, обнимашки и сладкие мечты после идеального дня.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+  <!-- Локации -->
+  <section id="location">
+    <div class="container places">
+      <h2 class="title">Локации</h2>
+      <p class="subtitle">Вы можете добраться до банкетного зала самостоятельно или воспользоваться трансфером от домов жениха и невесты.</p>
+
+      <div class="place-cards">
+        <div class="place">
+          <h3>Дом жениха</h3>
+          <p class="location__text">Адрес: <span class="copyable" id="addr-g" data-copy="с. Атюрьево, ул. Октябрьская, 1">с. Атюрьево, ул. Октябрьская, 1</span></p>
+          <div id="map-groom" class="map" aria-label="Карта: дом жениха"></div>
+        </div>
+        <div class="place">
+          <h3>Дом невесты</h3>
+          <p class="location__text">Адрес: <span class="copyable" id="addr-b" data-copy="с. Атюрьево, ул. Комсомольская, 50">с. Атюрьево, ул. Комсомольская, 50</span></p>
+          <div id="map-bride" class="map" aria-label="Карта: дом невесты"></div>
+        </div>
+        <div class="place">
+          <h3>Банкетный зал «Флагман»</h3>
+          <p class="location__text">Адрес: <span class="copyable" id="address" data-copy="г. Темников, ул. Коммунистическая, 5/1">г. Темников, ул. Коммунистическая, 5/1</span></p>
+          <div id="map-hall" class="map" aria-label="Карта: банкетный зал"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Детали -->
+  <section id="details" aria-label="Детали торжества" class="parallax parallax--rip">
+    <div class="parallax__img" style="--img:url('futor.jpg')"></div>
+    <div class="parallax__content">
+      <div class="container">
+        <h2 class="title">Детали</h2>
+
+        <div class="details-list">
+          <div class="details-item">
+            <!-- SVG иконка "галстук-бабочка" -->
+            <svg class="details-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 7l5 3v4l-5 3V7zM20 7l-5 3v4l5 3V7zM9 10h6v4H9z" 
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+            <div class="details-text">
+              <strong>Дресс-код:</strong> официальный стиль<br>
+              <span class="details-note">Будем рады, если вы его поддержите, но главное — ваше присутствие.</span>
+            </div>
+          </div>
+          <div class="details-item">
+            <div class="details-text">
+      Скоро здесь появятся дополнительные заметки: сбор гостей, схема рассадки и др.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Контакты -->
+  <section id="contacts" aria-label="Контакты">
+    <div class="container">
+      <h2 class="title">Контакты</h2>
+      <p class="subtitle">Пожалуйста, дайте знать о своём присутствии.</p>
+      <div class="contacts__grid">
+        <div class="contact"><h3>Виктор</h3><p>Телефон: <a href="tel:+79510556236">+7 (951) 055-62-36</a></p><p>Telegram: <a href="https://t.me/viktorvv123">@viktorvv123</a></p></div>
+        <div class="contact"><h3>Людмила</h3><p>Телефон: <a href="tel:+79271870501">+7 (927) 187-05-01</a></p><p>Telegram: <a href="https://t.me/Lude001">@Lude001</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>С любовью, Виктор и Людмила • 14.02.2026</footer>
+
+  <!-- Тост "Скопировано" -->
+  <div id="toast" class="toast" role="status" aria-live="polite">Скопировано</div>
+
+  <!-- Яндекс.Карты API -->
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+

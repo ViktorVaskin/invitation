@@ -167,25 +167,22 @@
   <!-- Локации -->
   <section id="location">
     <div class="container places">
-      <h2 class="title">Локации</h2>
-      <p class="subtitle">Вы можете добраться до банкетного зала самостоятельно или воспользоваться трансфером от домов жениха и невесты.</p>
+      <h2 class="title">Локация</h2>
+      
+      <!-- Описание и фото зала -->
+      <div class="hall-info-section">
+        <h3 class="hall-info__title">Банкетный зал «Флагман»</h3>
+        <p class="hall-info__text">Наша свадьба состоится в уютном банкетном зале <strong>«Флагман»</strong>, который находится по адресу <span class="copyable location__address" id="address" data-copy="г. Темников, ул. Коммунистическая, 5/1">г. Темников, ул. Коммунистическая, 5/1</span></p>
+        <div class="hall-photo">
+          <img src="hall.jpg" alt="Банкетный зал Флагман" />
+        </div>
+      </div>
 
-      <div class="place-cards">
-        <div class="place">
-          <h3>Дом жениха</h3>
-          <p class="location__text">Адрес: <span class="copyable" id="addr-g" data-copy="с. Атюрьево, ул. Октябрьская, 1">с. Атюрьево, ул. Октябрьская, 1</span></p>
-          <div id="map-groom" class="map" aria-label="Карта: дом жениха"></div>
-        </div>
-        <div class="place">
-          <h3>Дом невесты</h3>
-          <p class="location__text">Адрес: <span class="copyable" id="addr-b" data-copy="с. Атюрьево, ул. Комсомольская, 50">с. Атюрьево, ул. Комсомольская, 50</span></p>
-          <div id="map-bride" class="map" aria-label="Карта: дом невесты"></div>
-        </div>
-        <div class="place">
-          <h3>Банкетный зал «Флагман»</h3>
-          <p class="location__text">Адрес: <span class="copyable" id="address" data-copy="г. Темников, ул. Коммунистическая, 5/1">г. Темников, ул. Коммунистическая, 5/1</span></p>
-          <div id="map-hall" class="map" aria-label="Карта: банкетный зал"></div>
-        </div>
+      <!-- Как добраться с картой -->
+      <div class="transport-section">
+        <h3 class="transport__title">Как добраться</h3>
+        <p class="transport__text">Мы подготовили для вас карту с точным расположением зала, а также организуем трансфер от домов жениха и невесты для вашего удобства. Подробности уточняйте у нас лично.</p>
+        <div id="map-hall" class="map" aria-label="Карта: банкетный зал"></div>
       </div>
     </div>
   </section>

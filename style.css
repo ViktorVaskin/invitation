@@ -130,34 +130,94 @@ section{padding:56px 16px} /* компактнее на мобилках */
 .program-note{color:var(--muted);font-size:13px;margin-top:6px}
 
 /* Локации */
-.places{display:grid;gap:16px;max-width:980px;margin:0 auto}
+.places{display:grid;gap:24px;max-width:980px;margin:0 auto}
 
-/* === FORCE: карты только 1 или 3, без 2-х колонок === */
-.place-cards{
-  display:grid;
-  grid-auto-flow: row;
-  grid-template-columns: 1fr !important;      /* по умолчанию: одна колонка */
-  gap: 16px;
+/* Секция с информацией о зале */
+.hall-info-section{
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  text-align: center;
+  font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-style: normal;
 }
 
-/* только на очень широких экранах — ровно 3 в ряд */
-@media (min-width: 1280px){
-  .place-cards{
-    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
-  }
+.hall-info__title{
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: clamp(20px, 5vw, 28px);
+  margin: 0 0 16px;
+  color: var(--fg);
 }
 
-/* карточки и карты как были */
-.place{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-style:normal}
-.place h3{margin:6px 0 8px;font-family:"Playfair Display",serif;font-weight:700}
-.location__text{margin-bottom:12px}
+.hall-info__text{
+  font-size: clamp(15px, 4vw, 18px);
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0 0 20px;
+}
+
+.hall-photo{
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.hall-photo img{
+  width: 100%;
+  height: auto;
+  display: block;
+  min-height: clamp(200px, 30vh, 300px);
+  object-fit: cover;
+}
+
 .map{
   width:100%;
-  margin:0 auto;
+  margin:16px auto 0;
   min-height:clamp(220px,38vh,420px);
   border-radius:12px;
   overflow:hidden;
   box-shadow:var(--shadow);
+}
+
+/* Кликабельный адрес */
+.location__address{
+  color: var(--brand);
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-weight: 500;
+}
+.location__address:hover{
+  color: var(--fg);
+  text-decoration: none;
+}
+
+/* Секция "Как добраться" */
+.transport-section{
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin-top: 16px;
+  text-align: center;
+  font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-style: normal;
+}
+.transport__title{
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: clamp(18px, 4vw, 24px);
+  margin: 0 0 12px;
+  color: var(--fg);
+}
+.transport__text{
+  font-size: clamp(14px, 3.5vw, 16px);
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0;
 }
 
 
@@ -177,7 +237,6 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
 @media (min-width:600px){
   section{padding:64px 18px}
   .mini-cal{--sz: clamp(36px,7vw,48px)}
-  .place-cards{grid-template-columns:repeat(2,1fr);gap:16px}
   .contacts__grid{grid-template-columns:repeat(2,1fr);gap:16px;justify-items:center}
   .contact{max-width:380px;width:100%}
 }
@@ -185,7 +244,6 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
 /* ====== Экраны ≥960px (десктоп) ====== */
 @media (min-width:960px){
   section{padding:72px 24px}
-  .place-cards{grid-template-columns:repeat(3,1fr)}
   .mini-cal{--sz: 46px}
   .cd-numbers{gap:clamp(28px,5vw,72px)}
 }

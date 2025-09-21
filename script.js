@@ -1,51 +1,45 @@
 	(function(){
-	  // координаты
-	  const HALL_COORDS  = [54.629754, 43.203927]; // Флагман, Темников
-	  const BRIDE_COORDS = [54.328481, 43.341610]; // Атюрьево, Комсомольская, 50
-	  const GROOM_COORDS = [54.317301, 43.342527]; // Атюрьево, Октябрьская, 1
+	  // координаты банкетного зала
+	  const HALL_COORDS  = [54.629800, 43.203700]; // Флагман, Темников
 
-	  // храним ссылки на карты
-	  const maps = {};
+	  // храним ссылку на карту
+	  let map = null;
 
 	  function createMap(id, center, title){
-	    const map = new ymaps.Map(id, { center, zoom: 16, controls: ['zoomControl'] });
+	    const mapInstance = new ymaps.Map(id, { center, zoom: 18, controls: ['zoomControl'] });
 	    const pm  = new ymaps.Placemark(center, { hintContent: title, balloonContent: title }, { preset: 'islands#redHeartIcon' });
-	    map.geoObjects.add(pm);
-	    maps[id] = map;
-	    return map;
+	    mapInstance.geoObjects.add(pm);
+	    map = mapInstance;
+	    return mapInstance;
 	  }
 
-	  // лёгкий debounce, чтобы не дёргать карты слишком часто
+	  // лёгкий debounce, чтобы не дёргать карту слишком часто
 	  function debounce(fn, ms){
 	    let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn.apply(null,args), ms); };
 	  }
 
 	  // при изменении ширины: подгоняем вьюпорт и возвращаем центр, чтобы метка не «уплывала»
-	  const refitAll = debounce(function(){
-	    Object.values(maps).forEach((m)=>{
-	      if(!m || !m.container) return;
-	      const c = m.getCenter();
-	      m.container.fitToViewport();
-	      m.setCenter(c);
-	    });
+	  const refitMap = debounce(function(){
+	    if(!map || !map.container) return;
+	    const c = map.getCenter();
+	    map.container.fitToViewport();
+	    map.setCenter(c);
 	  }, 120);
 
 	  ymaps.ready(function(){
-	    createMap('map-hall',  HALL_COORDS,  'Банкетный зал «Флагман»');
-	    createMap('map-bride', BRIDE_COORDS, 'Дом невесты');
-	    createMap('map-groom', GROOM_COORDS, 'Дом жениха');
+	    createMap('map-hall', HALL_COORDS, 'Банкетный зал «Флагман»');
 
 	    // подстроить сразу после первого рендера (на случай поздней загрузки шрифтов)
-	    setTimeout(refitAll, 50);
+	    setTimeout(refitMap, 50);
 	    // и на ресайз окна
-	    window.addEventListener('resize', refitAll);
+	    window.addEventListener('resize', refitMap);
 	    // плюс когда сетка меняется из-за медиазапроса (часто хватает одного таймера)
-	    window.matchMedia('(min-width:1100px)').addEventListener('change', refitAll);
+	    window.matchMedia('(min-width:1100px)').addEventListener('change', refitMap);
 	  });
 	})();
 
 
-    // Копирование адресов с тостом
+    // Копирование адреса с тостом
     (function(){
       var toast = document.getElementById('toast');
       function bindCopy(id){
@@ -61,7 +55,8 @@
           if(toast){ toast.textContent='Скопировано'; toast.classList.add('toast--show'); setTimeout(function(){ toast.classList.remove('toast--show'); }, 1200); }
         });
       }
-      ['addr-g','addr-b','address'].forEach(bindCopy);
+      // Привязываем только к адресу банкетного зала
+      bindCopy('address');
     })();
 
     // Таймер до свадьбы (14.02.2026 13:00 МСК)

@@ -14,7 +14,7 @@
 
 :root{
   --bg:#fff7f2; --fg:#2a2a2a; --muted:#6f6f6f;
-  --brand:#b86b77; --card:#ffffff;
+  --brand:#b86b77; --card:rgba(0,0,0,0.08); --card-dark:rgba(255,255,255,0.08);
   --shadow:0 10px 30px rgba(0,0,0,.08); --radius:18px;
 }
 
@@ -67,7 +67,7 @@ section{padding:56px 16px} /* компактнее на мобилках */
 .hero{position:relative;min-height:100svh;display:grid;place-items:center;padding:0}
 .hero__bg{position:absolute;inset:0;overflow:hidden}
 .hero__bg img{
-  width:100%;height:100%;object-fit:cover;filter:brightness(.6) blur(1.5px);
+  width:100%;height:100%;object-fit:cover;filter:brightness(.6) blur(1.25px);
   opacity:0;transform:scale(1.03);
   transition:opacity 1.6s ease,transform 2.4s ease;will-change:opacity,transform
 }
@@ -121,22 +121,22 @@ section{padding:56px 16px} /* компактнее на мобилках */
 
 /* ---------- План мероприятия (вертикальный) ---------- */
 .program-list{display:grid;gap:16px;max-width:720px;margin:28px auto 0;text-align:left;padding:0 2px}
-.program-item{background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow);display:flex;align-items:flex-start;gap:12px;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-style:normal}
-.program-icon{flex:0 0 40px;width:clamp(32px,10vw,48px);height:clamp(32px,10vw,48px);color:var(--fg)}
+.program-item{background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow);display:flex;align-items:flex-start;gap:12px;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-style:normal;backdrop-filter:blur(20px);border:1px solid rgba(0,0,0,0.1);color:#faf0e6}
+.program-icon{flex:0 0 40px;width:clamp(32px,10vw,48px);height:clamp(32px,10vw,48px);color:#faf0e6}
 .program-icon path,.program-icon rect,.program-icon circle{stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .program-text{font-size:clamp(16px,4.3vw,22px);font-weight:600;line-height:1.35}
-.program-time-note{font-size:13px;font-weight:400;color:var(--muted)}
+.program-time-note{font-size:13px;font-weight:400;color:rgba(250,240,230,0.8)}
 .program-time-note em{font-style:italic}
-.program-note{color:var(--muted);font-size:14px;margin-top:6px}
+.program-note{color:rgba(250,240,230,0.8);font-size:14px;margin-top:6px}
 .program-location{
   margin-top:4px;
 }
 .program-location-label{
-  color:var(--fg);
+  color:#faf0e6;
   font-size:14px;
 }
 .program-location-place{
-  color:var(--fg);
+  color:#faf0e6;
   font-size:14px;
   font-weight:400;
 }
@@ -146,13 +146,15 @@ section{padding:56px 16px} /* компактнее на мобилках */
 
 /* Секция с информацией о зале */
 .hall-info-section{
-  background: var(--card);
+  background: var(--card-dark);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 20px;
   text-align: center;
   font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   font-style: normal;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0,0,0,0.1);
 }
 
 .hall-info__title{
@@ -209,7 +211,7 @@ section{padding:56px 16px} /* компактнее на мобилках */
 
 /* Секция "Как добраться" */
 .transport-section{
-  background: var(--card);
+  background: var(--card-dark);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 20px;
@@ -217,6 +219,8 @@ section{padding:56px 16px} /* компактнее на мобилках */
   text-align: center;
   font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   font-style: normal;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0,0,0,0.1);
 }
 .transport__title{
   font-family: "Playfair Display", serif;
@@ -235,7 +239,7 @@ section{padding:56px 16px} /* компактнее на мобилках */
 
 /* ---------- Контакты ---------- */
 .contacts__grid{display:grid;grid-template-columns:1fr;gap:12px;justify-items:stretch}
-.contact{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-style:normal}
+.contact{background:var(--card-dark);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-style:normal;backdrop-filter:blur(20px);border:1px solid rgba(0,0,0,0.1)}
 .contact h3{font-family:"Playfair Display",serif;font-weight:700}
 
 /* ---------- Тост ---------- */
@@ -293,19 +297,23 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   gap:12px;
   font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   font-style:normal;
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(0,0,0,0.1);
+  color:#faf0e6;
 }
 .details-icon{
   flex:0 0 36px;
   width:36px;
   height:36px;
-  color:var(--fg);
+  color:#faf0e6;
 }
 .details-text{
   font-size:clamp(15px,4vw,18px);
   line-height:1.4;
+  color:#faf0e6;
 }
 .details-note{
-  color:var(--muted);
+  color:rgba(250,240,230,0.8);
   font-size:14px;
   font-weight:400;
 }
@@ -344,20 +352,7 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   transform: translate3d(0, var(--shift, 0px), 0); /* скролл-смещение из JS */
   will-change: transform;
   z-index: 1; /* под затемнением и контентом */
-}
-
-/* сильное затемнение внутри */
-.parallax.parallax--rip::after,
-.parallax::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: linear-gradient(180deg,
-    rgba(0,0,0,.70),
-    rgba(0,0,0,.50) 50%,
-    rgba(0,0,0,.70));
-  pointer-events:none;
-  z-index: 2;
+  filter: blur(3px) brightness(0.6);
 }
 
 #program .title,
@@ -367,12 +362,12 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   font-style:italic;
 }
 #details .details-text {
-  color: var(--fg); /* тёмный основной цвет текста */
+  color: #faf0e6; /* светлый цвет как на обложке */
   font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   font-style:normal;
 }
 #program .program-text {
-  color: var(--fg);
+  color: #faf0e6; /* светлый цвет как на обложке */
   font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   font-style:normal;
 }
@@ -382,6 +377,7 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   font-weight: 400;
   font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   font-style:normal;
+  color: rgba(250,240,230,0.8); /* полупрозрачный светлый */
 }
 
 

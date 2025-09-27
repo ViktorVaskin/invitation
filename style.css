@@ -127,7 +127,19 @@ section{padding:56px 16px} /* компактнее на мобилках */
 .program-text{font-size:clamp(16px,4.3vw,22px);font-weight:600;line-height:1.35}
 .program-time-note{font-size:13px;font-weight:400;color:var(--muted)}
 .program-time-note em{font-style:italic}
-.program-note{color:var(--muted);font-size:13px;margin-top:6px}
+.program-note{color:var(--muted);font-size:14px;margin-top:6px}
+.program-location{
+  margin-top:4px;
+}
+.program-location-label{
+  color:var(--fg);
+  font-size:14px;
+}
+.program-location-place{
+  color:var(--fg);
+  font-size:14px;
+  font-weight:400;
+}
 
 /* Локации */
 .places{display:grid;gap:24px;max-width:980px;margin:0 auto}
@@ -227,7 +239,24 @@ section{padding:56px 16px} /* компактнее на мобилках */
 .contact h3{font-family:"Playfair Display",serif;font-weight:700}
 
 /* ---------- Тост ---------- */
-.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--fg);color:#fff;padding:10px 14px;border-radius:999px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .25s ease}
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  background:var(--fg);
+  color:#fff;
+  padding:8px 12px;
+  border-radius:999px;
+  box-shadow:var(--shadow);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s ease;
+  font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-style:normal;
+  font-size:12px;
+  font-weight:400;
+}
 .toast--show{opacity:1}
 
 /* ---------- Подвал ---------- */
@@ -278,6 +307,7 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
 .details-note{
   color:var(--muted);
   font-size:14px;
+  font-weight:400;
 }
 
 /* ===== ПАРАЛЛАКС-РАЗДЕЛИТЕЛИ (процентная высота) ===== */
@@ -341,10 +371,15 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   font-style:normal;
 }
-#program .program-text,
+#program .program-text {
+  color: var(--fg);
+  font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-style:normal;
+}
 #program .program-time-note,
 #program .program-note {
-  color: var(--fg);
+  font-size: 14px;
+  font-weight: 400;
   font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   font-style:normal;
 }

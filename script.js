@@ -93,8 +93,12 @@
 
   if (!items.length) return;
 
-  // Настройки эффекта (чем меньше factor, тем "медленнее" фон)
-  const factor = 0.30;  // 0.2–0.35 обычно оптимально
+  // Определяем iOS
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  
+  // Настройки эффекта (меньше для iOS для лучшей производительности)
+  const factor = isIOS ? 0.15 : 0.30;
 
   let ticking = false;
 
@@ -118,7 +122,12 @@
       const maxShift = vh * 0.10 + rect.height * 0.10; // запас
       const clamped = Math.max(-maxShift, Math.min(maxShift, shift));
 
-      img.style.setProperty('--shift', clamped.toFixed(2) + 'px');
+      // Для iOS используем более плавные переходы
+      if (isIOS) {
+        img.style.setProperty('--shift', clamped.toFixed(1) + 'px');
+      } else {
+        img.style.setProperty('--shift', clamped.toFixed(2) + 'px');
+      }
     });
   }
 

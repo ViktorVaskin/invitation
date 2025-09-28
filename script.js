@@ -87,7 +87,7 @@
       else { img.addEventListener('load', function(){ requestAnimationFrame(reveal); }, { once:true }); setTimeout(reveal, 2000); }
     })();
     
-// ===== Мобильный параллакс без дерганий =====
+// ===== Параллакс для всех устройств с оптимизациями для iOS =====
 (function(){
   const items = Array.from(document.querySelectorAll('.parallax'));
 
@@ -97,14 +97,16 @@
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
                 (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   
-  // Настройки эффекта (умеренные для всех устройств)
-  const factor = isIOS ? 0.20 : 0.30;
+  // Настройки эффекта (меньше для iOS)
+  const factor = isIOS ? 0.15 : 0.3;
 
   let ticking = false;
+  let lastScrollY = 0;
 
   function update() {
     ticking = false;
     const vh = window.innerHeight || 1;
+    const currentScrollY = window.scrollY;
 
     items.forEach(sec => {
       const img = sec.querySelector('.parallax__img');
@@ -113,15 +115,26 @@
       const rect = sec.getBoundingClientRect();
       const center = rect.top + rect.height/2;
       const delta = center - vh/2;
-      const shift = -delta * factor;
+      let shift = -delta * factor;
+
+      // Для iOS добавляем сглаживание
+      if (isIOS) {
+        const scrollDelta = currentScrollY - lastScrollY;
+        // Ограничиваем скорость изменения
+        const maxScrollDelta = 5;
+        const smoothedDelta = Math.max(-maxScrollDelta, Math.min(maxScrollDelta, scrollDelta));
+        shift += smoothedDelta * 0.1;
+      }
 
       // Ограничим сдвиг
-      const maxShift = vh * 0.10 + rect.height * 0.10;
+      const maxShift = vh * 0.12;
       const clamped = Math.max(-maxShift, Math.min(maxShift, shift));
 
       // Применяем сдвиг
-      img.style.setProperty('--shift', clamped.toFixed(2) + 'px');
+      img.style.setProperty('--shift', clamped.toFixed(1) + 'px');
     });
+
+    lastScrollY = currentScrollY;
   }
 
   function onScrollOrResize(){
@@ -131,8 +144,22 @@
     }
   }
 
+  // Throttling для iOS
+  let scrollTimeout;
+  function throttledScroll() {
+    if (scrollTimeout) return;
+    scrollTimeout = setTimeout(() => {
+      onScrollOrResize();
+      scrollTimeout = null;
+    }, isIOS ? 16 : 8); // 60fps для iOS, 120fps для остальных
+  }
+
   // Первичный расчёт и подписки
-  window.addEventListener('scroll', onScrollOrResize, { passive: true });
+  if (isIOS) {
+    window.addEventListener('scroll', throttledScroll, { passive: true });
+  } else {
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+  }
   window.addEventListener('resize', onScrollOrResize);
   window.addEventListener('load', onScrollOrResize);
   onScrollOrResize();

@@ -97,8 +97,8 @@
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
                 (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   
-  // Настройки эффекта (меньше для iOS для лучшей производительности)
-  const factor = isIOS ? 0.15 : 0.30;
+  // Настройки эффекта (умеренные для всех устройств)
+  const factor = isIOS ? 0.20 : 0.30;
 
   let ticking = false;
 
@@ -111,23 +111,16 @@
       if (!img) return;
 
       const rect = sec.getBoundingClientRect();
-      // Прогресс видимости секции: от -vh..vh -> нормализуем к 0..1
       const center = rect.top + rect.height/2;
-      const delta = center - vh/2;     // расстояние от центра вьюпорта
-      // Сколько сдвигать: небольшая доля этого расстояния
+      const delta = center - vh/2;
       const shift = -delta * factor;
 
-      // Ограничим сдвиг, чтобы точно не выехать за "overscan"
-      // overscan ~ 12vh сверху/снизу -> безопасная рамка:
-      const maxShift = vh * 0.10 + rect.height * 0.10; // запас
+      // Ограничим сдвиг
+      const maxShift = vh * 0.10 + rect.height * 0.10;
       const clamped = Math.max(-maxShift, Math.min(maxShift, shift));
 
-      // Для iOS используем более плавные переходы
-      if (isIOS) {
-        img.style.setProperty('--shift', clamped.toFixed(1) + 'px');
-      } else {
-        img.style.setProperty('--shift', clamped.toFixed(2) + 'px');
-      }
+      // Применяем сдвиг
+      img.style.setProperty('--shift', clamped.toFixed(2) + 'px');
     });
   }
 
@@ -141,7 +134,6 @@
   // Первичный расчёт и подписки
   window.addEventListener('scroll', onScrollOrResize, { passive: true });
   window.addEventListener('resize', onScrollOrResize);
-  // На всякий случай — после загрузки шрифтов/картинок
   window.addEventListener('load', onScrollOrResize);
   onScrollOrResize();
 })();

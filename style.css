@@ -461,6 +461,11 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   .parallax__img {
     -webkit-transform: translate3d(0, var(--shift, 0px), 0) translateZ(0);
     transform: translate3d(0, var(--shift, 0px), 0) translateZ(0);
+    /* Дополнительные оптимизации для iOS Telegram */
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+    -webkit-filter: none;
+    filter: none;
   }
   
   /* Отключаем параллакс на очень маленьких экранах iOS для производительности */
@@ -469,6 +474,15 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
       transform: none !important;
       -webkit-transform: none !important;
     }
+  }
+}
+
+/* ====== Дополнительные оптимизации для мобильных ====== */
+@media (max-width: 768px) {
+  .parallax__img {
+    /* Плавные переходы для мобильных */
+    transition: transform 0.1s ease-out;
+    -webkit-transition: -webkit-transform 0.1s ease-out;
   }
 }
 

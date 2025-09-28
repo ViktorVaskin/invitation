@@ -1,0 +1,37 @@
+<svg viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg">
+  <!-- Основная линия -->
+  <line x1="30" y1="15" x2="270" y2="15" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+  
+  <!-- Левый завиток -->
+  <path d="M30 15 Q20 10, 15 15 Q20 20, 30 15" 
+        stroke="currentColor" stroke-width="1" fill="none" opacity="0.4"/>
+  
+  <!-- Правый завиток -->
+  <path d="M270 15 Q280 10, 285 15 Q280 20, 270 15" 
+        stroke="currentColor" stroke-width="1" fill="none" opacity="0.4"/>
+  
+  <!-- Центральный орнамент -->
+  <!-- Левый ромб -->
+  <path d="M135 12 L138 15 L135 18 L132 15 Z" 
+        fill="currentColor" opacity="0.4"/>
+  
+  <!-- Стрелки влево -->
+  <path d="M142 15 L140 13 M142 15 L140 17" 
+        stroke="currentColor" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M145 15 L143 13 M145 15 L143 17" 
+        stroke="currentColor" stroke-width="1" fill="none" opacity="0.4"/>
+  
+  <!-- Центральный круг -->
+  <circle cx="150" cy="15" r="2" 
+          stroke="currentColor" stroke-width="1" fill="none" opacity="0.4"/>
+  
+  <!-- Стрелки вправо -->
+  <path d="M155 15 L157 13 M155 15 L157 17" 
+        stroke="currentColor" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M158 15 L160 13 M158 15 L160 17" 
+        stroke="currentColor" stroke-width="1" fill="none" opacity="0.4"/>
+  
+  <!-- Правый ромб -->
+  <path d="M165 12 L168 15 L165 18 L162 15 Z" 
+        fill="currentColor" opacity="0.4"/>
+</svg>

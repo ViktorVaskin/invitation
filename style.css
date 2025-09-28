@@ -375,19 +375,9 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transform: translate3d(0, var(--shift, 0px), 0); /* скролл-смещение из JS */
+  transform: translate3d(0, var(--shift, 0px), 0); /* параллакс через transform */
   will-change: transform;
   z-index: 1; /* под затемнением и контентом */
-  
-  /* iOS оптимизации для параллакса */
-  -webkit-transform: translate3d(0, var(--shift, 0px), 0);
-  transform: translate3d(0, var(--shift, 0px), 0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-perspective: 1000;
-  perspective: 1000;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
 }
 
 /* сильное затемнение внутри */
@@ -428,7 +418,7 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
 /* ====== Мобильные устройства < 600px ====== */
 @media (max-width:599px){
   .parallax .parallax__img{
-    background-size: 250% auto !important; /* показываем больше изображения на мобильных */
+    background-size: 270% auto !important; /* показываем больше изображения на мобильных */
     background-position: center 50% !important; /* смещаем немного вниз */
   }
 }
@@ -438,6 +428,24 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   .parallax .parallax__img{
     background-size: 320% auto !important; /* показываем больше изображения на мобильных */
     background-position: center 50% !important; /* смещаем немного вниз */
+  }
+}
+
+/* ====== iOS оптимизации для параллакса ====== */
+@supports (-webkit-touch-callout: none) {
+  .parallax__img {
+    /* iOS оптимизации */
+    -webkit-transform: translate3d(0, var(--shift, 0px), 0);
+    transform: translate3d(0, var(--shift, 0px), 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    perspective: 1000;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    /* Плавные переходы для iOS */
+    transition: transform 0.1s ease-out;
+    -webkit-transition: -webkit-transform 0.1s ease-out;
   }
 }
 
@@ -456,24 +464,6 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   .is-hero-loaded .hero__bg img {
     -webkit-transform: scale(1) translateZ(0);
     transform: scale(1) translateZ(0);
-  }
-  
-  .parallax__img {
-    -webkit-transform: translate3d(0, var(--shift, 0px), 0) translateZ(0);
-    transform: translate3d(0, var(--shift, 0px), 0) translateZ(0);
-    /* Дополнительные оптимизации для iOS Telegram */
-    -webkit-transform-origin: center center;
-    transform-origin: center center;
-    -webkit-filter: none;
-    filter: none;
-  }
-  
-  /* Отключаем параллакс на очень маленьких экранах iOS для производительности */
-  @media (max-width: 480px) and (max-height: 800px) {
-    .parallax__img {
-      transform: none !important;
-      -webkit-transform: none !important;
-    }
   }
 }
 

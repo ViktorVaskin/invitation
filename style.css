@@ -266,6 +266,16 @@ section{padding:56px 16px} /* компактнее на мобилках */
 /* ---------- Подвал ---------- */
 footer{padding:32px 16px;color:var(--muted);text-align:center}
 
+/* ====== Мобильные устройства ====== */
+@media (max-width:599px){
+  .parallax__img{
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    min-height: 200px;
+  }
+}
+
 /* ====== Экраны ≥600px (планшет-портрет) ====== */
 @media (min-width:600px){
   section{padding:64px 18px}
@@ -346,8 +356,8 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   bottom: calc(-1 * var(--overscan));
   left: 0; right: 0;
   background-image: var(--img);           /* берёт url(...) из инлайна */
-  background-size: cover;
-  background-position: center;
+  background-size: 100% auto;
+  background-position: center top;
   background-repeat: no-repeat;
   transform: translate3d(0, var(--shift, 0px), 0); /* скролл-смещение из JS */
   will-change: transform;

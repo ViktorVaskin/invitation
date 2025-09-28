@@ -51,6 +51,15 @@ html,body{
   text-size-adjust:100%;
   scroll-behavior:smooth;
   text-align:center;
+  
+  /* iOS фиксы для плавной прокрутки */
+  -webkit-overflow-scrolling:touch;
+  -webkit-transform:translateZ(0);
+  transform:translateZ(0);
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+  -webkit-perspective:1000;
+  perspective:1000;
 }
 img{max-width:100%;display:block}
 a{color:var(--brand);text-decoration:none;cursor:pointer}
@@ -64,14 +73,24 @@ section{padding:56px 16px} /* компактнее на мобилках */
 .subtitle{font-size:clamp(15px,4vw,20px);color:var(--muted);margin:0 0 24px;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-style:normal}
 
 /* ---------- Обложка ---------- */
-.hero{position:relative;min-height:100svh;display:grid;place-items:center;padding:0}
+.hero{position:relative;min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:0}
 .hero__bg{position:absolute;inset:0;overflow:hidden}
 .hero__bg img{
   width:100%;height:100%;object-fit:cover;filter:brightness(.6) saturate(1.05) blur(1.25px);
   opacity:0;transform:scale(1.03);
-  transition:opacity 1.6s ease,transform 2.4s ease;will-change:opacity,transform
+  transition:opacity 1.6s ease,transform 2.4s ease;will-change:opacity,transform;
+  /* iOS фиксы */
+  -webkit-transform:scale(1.03);
+  transform:scale(1.03);
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+  -webkit-perspective:1000;
+  perspective:1000;
 }
-.is-hero-loaded .hero__bg img{opacity:1;transform:scale(1)}
+.is-hero-loaded .hero__bg img{
+  opacity:1;transform:scale(1);
+  -webkit-transform:scale(1);
+}
 .hero__content{position:relative;color:#faf0e6;padding:20px;z-index: 2;}
 .hero__names{font-family:"PlayfairDisplaySC",serif;font-size:clamp(40px,12vw,100px);font-weight:normal;margin:0 0 340px;letter-spacing:0.02em;opacity:0.95;font-style:italic}
 .hero__date{font-family:"PlayfairDisplaySC",serif;font-size:clamp(32px,10vw,75px);font-weight:normal;margin:0;letter-spacing:0.08em;opacity:0.85;font-style:italic}
@@ -359,6 +378,16 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   transform: translate3d(0, var(--shift, 0px), 0); /* скролл-смещение из JS */
   will-change: transform;
   z-index: 1; /* под затемнением и контентом */
+  
+  /* iOS оптимизации для параллакса */
+  -webkit-transform: translate3d(0, var(--shift, 0px), 0);
+  transform: translate3d(0, var(--shift, 0px), 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 
 /* сильное затемнение внутри */
@@ -409,6 +438,37 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   .parallax .parallax__img{
     background-size: 320% auto !important; /* показываем больше изображения на мобильных */
     background-position: center 50% !important; /* смещаем немного вниз */
+  }
+}
+
+/* ====== iOS Safari/Telegram специфичные фиксы ====== */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari/Telegram */
+  .hero {
+    min-height: 100vh; /* fallback для iOS */
+  }
+  
+  .hero__bg img {
+    -webkit-transform: scale(1.03) translateZ(0);
+    transform: scale(1.03) translateZ(0);
+  }
+  
+  .is-hero-loaded .hero__bg img {
+    -webkit-transform: scale(1) translateZ(0);
+    transform: scale(1) translateZ(0);
+  }
+  
+  .parallax__img {
+    -webkit-transform: translate3d(0, var(--shift, 0px), 0) translateZ(0);
+    transform: translate3d(0, var(--shift, 0px), 0) translateZ(0);
+  }
+  
+  /* Отключаем параллакс на очень маленьких экранах iOS для производительности */
+  @media (max-width: 480px) and (max-height: 800px) {
+    .parallax__img {
+      transform: none !important;
+      -webkit-transform: none !important;
+    }
   }
 }
 

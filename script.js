@@ -87,21 +87,16 @@
       else { img.addEventListener('load', function(){ requestAnimationFrame(reveal); }, { once:true }); setTimeout(reveal, 2000); }
     })();
     
-// ===== Плавный параллакс для всех устройств =====
+// ===== Мобильный параллакс без дерганий =====
 (function(){
   const items = Array.from(document.querySelectorAll('.parallax'));
 
   if (!items.length) return;
 
-  // Определяем мобильные устройства
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-                   window.innerWidth <= 768;
-  
-  // Настройки эффекта (меньше для мобильных)
-  const factor = isMobile ? 0.1 : 0.25;
+  // Настройки эффекта (чем меньше factor, тем "медленнее" фон)
+  const factor = 0.30;  // 0.2–0.35 обычно оптимально
 
   let ticking = false;
-  let currentShift = 0;
 
   function update() {
     ticking = false;
@@ -112,23 +107,18 @@
       if (!img) return;
 
       const rect = sec.getBoundingClientRect();
+      // Прогресс видимости секции: от -vh..vh -> нормализуем к 0..1
       const center = rect.top + rect.height/2;
-      const delta = center - vh/2;
-      const targetShift = -delta * factor;
+      const delta = center - vh/2;     // расстояние от центра вьюпорта
+      // Сколько сдвигать: небольшая доля этого расстояния
+      const shift = -delta * factor;
 
-      // Плавное сглаживание для мобильных
-      if (isMobile) {
-        currentShift += (targetShift - currentShift) * 0.1;
-      } else {
-        currentShift = targetShift;
-      }
+      // Ограничим сдвиг, чтобы точно не выехать за "overscan"
+      // overscan ~ 12vh сверху/снизу -> безопасная рамка:
+      const maxShift = vh * 0.10 + rect.height * 0.10; // запас
+      const clamped = Math.max(-maxShift, Math.min(maxShift, shift));
 
-      // Ограничим сдвиг
-      const maxShift = vh * 0.1;
-      const clamped = Math.max(-maxShift, Math.min(maxShift, currentShift));
-
-      // Применяем сдвиг
-      img.style.setProperty('--shift', Math.round(clamped) + 'px');
+      img.style.setProperty('--shift', clamped.toFixed(2) + 'px');
     });
   }
 
@@ -139,23 +129,10 @@
     }
   }
 
-  // Throttling для мобильных
-  let scrollTimeout;
-  function throttledScroll() {
-    if (scrollTimeout) return;
-    scrollTimeout = setTimeout(() => {
-      onScrollOrResize();
-      scrollTimeout = null;
-    }, isMobile ? 20 : 8); // 50fps для мобильных, 120fps для десктопа
-  }
-
   // Первичный расчёт и подписки
-  if (isMobile) {
-    window.addEventListener('scroll', throttledScroll, { passive: true });
-  } else {
-    window.addEventListener('scroll', onScrollOrResize, { passive: true });
-  }
+  window.addEventListener('scroll', onScrollOrResize, { passive: true });
   window.addEventListener('resize', onScrollOrResize);
+  // На всякий случай — после загрузки шрифтов/картинок
   window.addEventListener('load', onScrollOrResize);
   onScrollOrResize();
 })();

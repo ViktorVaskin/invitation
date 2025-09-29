@@ -431,23 +431,6 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   }
 }
 
-/* ====== iOS оптимизации для параллакса ====== */
-@supports (-webkit-touch-callout: none) {
-  .parallax__img {
-    /* iOS оптимизации */
-    -webkit-transform: translate3d(0, var(--shift, 0px), 0);
-    transform: translate3d(0, var(--shift, 0px), 0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-perspective: 1000;
-    perspective: 1000;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    /* Плавные переходы для iOS */
-    transition: transform 0.1s ease-out;
-    -webkit-transition: -webkit-transform 0.1s ease-out;
-  }
-}
 
 /* ====== iOS Safari/Telegram специфичные фиксы ====== */
 @supports (-webkit-touch-callout: none) {
@@ -467,16 +450,5 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   }
 }
 
-/* ====== Дополнительные оптимизации для мобильных ====== */
-@media (max-width: 768px) {
-  .parallax__img {
-    /* Плавные переходы для мобильных */
-    transition: transform 0.2s ease-out;
-    -webkit-transition: -webkit-transform 0.2s ease-out;
-    /* Дополнительное сглаживание */
-    -webkit-transform: translate3d(0, var(--shift, 0px), 0) translateZ(0);
-    transform: translate3d(0, var(--shift, 0px), 0) translateZ(0);
-  }
-}
 
 

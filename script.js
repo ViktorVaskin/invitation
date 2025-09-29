@@ -86,7 +86,7 @@
       if(img.complete){ requestAnimationFrame(reveal); }
       else { img.addEventListener('load', function(){ requestAnimationFrame(reveal); }, { once:true }); setTimeout(reveal, 2000); }
     })();
-    
+
 // ===== Мобильный параллакс без дерганий =====
 (function(){
   const items = Array.from(document.querySelectorAll('.parallax'));
@@ -136,3 +136,4 @@
   window.addEventListener('load', onScrollOrResize);
   onScrollOrResize();
 })();
+    

@@ -87,26 +87,25 @@
       else { img.addEventListener('load', function(){ requestAnimationFrame(reveal); }, { once:true }); setTimeout(reveal, 2000); }
     })();
     
-// ===== Параллакс для всех устройств с оптимизациями для iOS =====
+// ===== Плавный параллакс для всех устройств =====
 (function(){
   const items = Array.from(document.querySelectorAll('.parallax'));
 
   if (!items.length) return;
 
-  // Определяем iOS
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
-                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  // Определяем мобильные устройства
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                   window.innerWidth <= 768;
   
-  // Настройки эффекта (меньше для iOS)
-  const factor = isIOS ? 0.15 : 0.3;
+  // Настройки эффекта (меньше для мобильных)
+  const factor = isMobile ? 0.1 : 0.25;
 
   let ticking = false;
-  let lastScrollY = 0;
+  let currentShift = 0;
 
   function update() {
     ticking = false;
     const vh = window.innerHeight || 1;
-    const currentScrollY = window.scrollY;
 
     items.forEach(sec => {
       const img = sec.querySelector('.parallax__img');
@@ -115,26 +114,22 @@
       const rect = sec.getBoundingClientRect();
       const center = rect.top + rect.height/2;
       const delta = center - vh/2;
-      let shift = -delta * factor;
+      const targetShift = -delta * factor;
 
-      // Для iOS добавляем сглаживание
-      if (isIOS) {
-        const scrollDelta = currentScrollY - lastScrollY;
-        // Ограничиваем скорость изменения
-        const maxScrollDelta = 5;
-        const smoothedDelta = Math.max(-maxScrollDelta, Math.min(maxScrollDelta, scrollDelta));
-        shift += smoothedDelta * 0.1;
+      // Плавное сглаживание для мобильных
+      if (isMobile) {
+        currentShift += (targetShift - currentShift) * 0.1;
+      } else {
+        currentShift = targetShift;
       }
 
       // Ограничим сдвиг
-      const maxShift = vh * 0.12;
-      const clamped = Math.max(-maxShift, Math.min(maxShift, shift));
+      const maxShift = vh * 0.1;
+      const clamped = Math.max(-maxShift, Math.min(maxShift, currentShift));
 
       // Применяем сдвиг
-      img.style.setProperty('--shift', clamped.toFixed(1) + 'px');
+      img.style.setProperty('--shift', Math.round(clamped) + 'px');
     });
-
-    lastScrollY = currentScrollY;
   }
 
   function onScrollOrResize(){
@@ -144,18 +139,18 @@
     }
   }
 
-  // Throttling для iOS
+  // Throttling для мобильных
   let scrollTimeout;
   function throttledScroll() {
     if (scrollTimeout) return;
     scrollTimeout = setTimeout(() => {
       onScrollOrResize();
       scrollTimeout = null;
-    }, isIOS ? 16 : 8); // 60fps для iOS, 120fps для остальных
+    }, isMobile ? 20 : 8); // 50fps для мобильных, 120fps для десктопа
   }
 
   // Первичный расчёт и подписки
-  if (isIOS) {
+  if (isMobile) {
     window.addEventListener('scroll', throttledScroll, { passive: true });
   } else {
     window.addEventListener('scroll', onScrollOrResize, { passive: true });

@@ -94,7 +94,7 @@
   if (!items.length) return;
 
   // Настройки эффекта (чем меньше factor, тем "медленнее" фон)
-  const factor = 0.30;  // 0.2–0.35 обычно оптимально
+  const factor = 0.20;  // 0.2–0.35 обычно оптимально
   const isMobile = window.innerWidth <= 768;
 
   let ticking = false;

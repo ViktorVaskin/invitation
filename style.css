@@ -432,23 +432,4 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
 }
 
 
-/* ====== iOS Safari/Telegram специфичные фиксы ====== */
-@supports (-webkit-touch-callout: none) {
-  /* iOS Safari/Telegram */
-  .hero {
-    min-height: 100vh; /* fallback для iOS */
-  }
-  
-  .hero__bg img {
-    -webkit-transform: scale(1.03) translateZ(0);
-    transform: scale(1.03) translateZ(0);
-  }
-  
-  .is-hero-loaded .hero__bg img {
-    -webkit-transform: scale(1) translateZ(0);
-    transform: scale(1) translateZ(0);
-  }
-}
-
-
 

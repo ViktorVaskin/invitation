@@ -95,6 +95,7 @@
 
   // Настройки эффекта (чем меньше factor, тем "медленнее" фон)
   const factor = 0.30;  // 0.2–0.35 обычно оптимально
+  const isMobile = window.innerWidth <= 768;
 
   let ticking = false;
 
@@ -114,8 +115,10 @@
       const shift = -delta * factor;
 
       // Ограничим сдвиг, чтобы точно не выехать за "overscan"
-      // overscan ~ 12vh сверху/снизу -> безопасная рамка:
-      const maxShift = vh * 0.10 + rect.height * 0.10; // запас
+      // На мобильных делаем более консервативные ограничения
+      const maxShift = isMobile ? 
+        vh * 0.06 + rect.height * 0.06 : // меньше на мобильных
+        vh * 0.10 + rect.height * 0.10;  // стандартно на десктопе
       const clamped = Math.max(-maxShift, Math.min(maxShift, shift));
 
       img.style.setProperty('--shift', clamped.toFixed(2) + 'px');

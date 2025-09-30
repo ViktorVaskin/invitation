@@ -87,16 +87,47 @@
       else { img.addEventListener('load', function(){ requestAnimationFrame(reveal); }, { once:true }); setTimeout(reveal, 2000); }
     })();
 
-    // Отключение параллакса на iOS
+    // Отключение параллакса на iOS и iOS WebView браузерах
     (function(){
       function isIOS() {
         return /iPad|iPhone|iPod/.test(navigator.userAgent) || 
                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
       }
       
-      if (isIOS()) {
+      function isIOSWebView() {
+        var ua = navigator.userAgent;
+        
+        // Telegram WebView на iOS
+        if (/TelegramBot|Telegram/.test(ua) && isIOS()) {
+          return true;
+        }
+        
+        // Opera на iOS
+        if (/Opera|OPR/.test(ua) && isIOS()) {
+          return true;
+        }
+        
+        // Safari на iOS (мобильная версия)
+        if (/Safari/.test(ua) && /Mobile|iPhone|iPad|iPod/.test(ua)) {
+          return true;
+        }
+        
+        // Другие WebView на iOS
+        if (/wv|WebView/.test(ua) && isIOS()) {
+          return true;
+        }
+        
+        return false;
+      }
+      
+      if (isIOS() || isIOSWebView()) {
         // Добавляем класс для iOS - CSS сам отключит параллакс
         document.documentElement.classList.add('ios-device');
+        
+        // Дополнительный класс для WebView браузеров
+        if (isIOSWebView()) {
+          document.documentElement.classList.add('ios-webview');
+        }
       }
     })();
 

@@ -87,56 +87,5 @@
       else { img.addEventListener('load', function(){ requestAnimationFrame(reveal); }, { once:true }); setTimeout(reveal, 2000); }
     })();
 
-// ===== Мобильный параллакс без дерганий =====
-(function(){
-  const items = Array.from(document.querySelectorAll('.parallax'));
 
-  if (!items.length) return;
-
-  // Настройки эффекта (чем меньше factor, тем "медленнее" фон)
-  const factor = 0.20;  // 0.2–0.35 обычно оптимально
-  const isMobile = window.innerWidth <= 768;
-
-  let ticking = false;
-
-  function update() {
-    ticking = false;
-    const vh = window.innerHeight || 1;
-
-    items.forEach(sec => {
-      const img = sec.querySelector('.parallax__img');
-      if (!img) return;
-
-      const rect = sec.getBoundingClientRect();
-      // Прогресс видимости секции: от -vh..vh -> нормализуем к 0..1
-      const center = rect.top + rect.height/2;
-      const delta = center - vh/2;     // расстояние от центра вьюпорта
-      // Сколько сдвигать: небольшая доля этого расстояния
-      const shift = -delta * factor;
-
-      // Ограничим сдвиг, чтобы точно не выехать за "overscan"
-      // На мобильных делаем более консервативные ограничения
-      const maxShift = isMobile ? 
-        vh * 0.06 + rect.height * 0.06 : // меньше на мобильных
-        vh * 0.10 + rect.height * 0.10;  // стандартно на десктопе
-      const clamped = Math.max(-maxShift, Math.min(maxShift, shift));
-
-      img.style.setProperty('--shift', clamped.toFixed(2) + 'px');
-    });
-  }
-
-  function onScrollOrResize(){
-    if (!ticking){
-      ticking = true;
-      requestAnimationFrame(update);
-    }
-  }
-
-  // Первичный расчёт и подписки
-  window.addEventListener('scroll', onScrollOrResize, { passive: true });
-  window.addEventListener('resize', onScrollOrResize);
-  // На всякий случай — после загрузки шрифтов/картинок
-  window.addEventListener('load', onScrollOrResize);
-  onScrollOrResize();
-})();
     

@@ -87,19 +87,71 @@
       else { img.addEventListener('load', function(){ requestAnimationFrame(reveal); }, { once:true }); setTimeout(reveal, 2000); }
     })();
 
-    // Отключение параллакса на iOS
+    // Параллакс для мобильных устройств
     (function(){
       function isIOS() {
         return /iPad|iPhone|iPod/.test(navigator.userAgent) || 
                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
       }
       
+      function isMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+               (navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
+      }
+      
       if (isIOS()) {
         // Добавляем класс для iOS - CSS сам отключит параллакс
         document.documentElement.classList.add('ios-device');
         console.log('iOS device detected, parallax disabled');
+      } else if (isMobile()) {
+        // JavaScript параллакс для мобильных устройств
+        document.documentElement.classList.add('mobile-device');
+        console.log('Mobile device detected, using JS parallax');
+        
+        // JavaScript параллакс
+        function updateParallax() {
+          const parallaxElements = document.querySelectorAll('.parallax');
+          const scrollTop = window.pageYOffset;
+          
+          parallaxElements.forEach(function(element) {
+            const rect = element.getBoundingClientRect();
+            const speed = 0.2; // Скорость параллакса (уменьшена)
+            
+            // Проверяем, виден ли элемент на экране
+            if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+              // Вычисляем позицию фона относительно элемента
+              const elementTop = rect.top + scrollTop;
+              const yPos = -(scrollTop - elementTop) * speed;
+              
+              // Двигаем только фон, а не весь элемент (используем CSS переменную)
+              const computedStyle = getComputedStyle(element);
+              const bgPosition = computedStyle.getPropertyValue('--parallax-bg-position');
+              const baseOffset = parseFloat(bgPosition) || -40; // Используем CSS переменную или -40 по умолчанию
+              const elementHeight = rect.height;
+              const offsetPx = (elementHeight * baseOffset) / 100; // Конвертируем % в пиксели
+              element.style.backgroundPosition = 'center ' + (offsetPx + yPos) + 'px';
+            }
+          });
+        }
+        
+        // Обновляем параллакс при скролле
+        let ticking = false;
+        function requestTick() {
+          if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+          }
+        }
+        
+        function onScroll() {
+          requestTick();
+          ticking = false;
+        }
+        
+        window.addEventListener('scroll', onScroll, { passive: true });
+        updateParallax(); // Инициализация
       } else {
-        console.log('Non-iOS device, parallax should work');
+        console.log('Desktop device, using CSS parallax');
       }
     })();
 

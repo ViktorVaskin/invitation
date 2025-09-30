@@ -107,8 +107,8 @@
           return true;
         }
         
-        // Safari на iOS (мобильная версия)
-        if (/Safari/.test(ua) && /Mobile|iPhone|iPad|iPod/.test(ua)) {
+        // Safari на iOS (мобильная версия) - только iOS устройства
+        if (/Safari/.test(ua) && isIOS()) {
           return true;
         }
         
@@ -128,6 +128,12 @@
         if (isIOSWebView()) {
           document.documentElement.classList.add('ios-webview');
         }
+        
+        // Отладка
+        console.log('iOS device detected, parallax disabled');
+      } else {
+        // Отладка для мобильных устройств
+        console.log('Non-iOS device, parallax should work');
       }
     })();
 

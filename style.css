@@ -372,40 +372,9 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
 
 /* ====== iOS устройства ====== */
 /* Отключаем параллакс только на iOS устройствах */
-@supports (-webkit-touch-callout: none) {
-  .parallax {
-    background-attachment: scroll !important;
-  }
-}
-
-/* Дополнительная защита через JS-класс для iOS */
-.ios-device .parallax {
-  background-attachment: scroll !important;
-}
-
-/* Специальные правила для iOS WebView браузеров */
+.ios-device .parallax,
 .ios-webview .parallax {
   background-attachment: scroll !important;
-  /* Дополнительные фиксы для WebView */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-/* Дополнительные медиа-запросы для iOS WebView */
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  .ios-webview .parallax {
-    background-attachment: scroll !important;
-  }
-}
-
-/* Для touch устройств на iOS */
-@media (hover: none) and (pointer: coarse) {
-  .ios-device .parallax,
-  .ios-webview .parallax {
-    background-attachment: scroll !important;
-  }
 }
 
 

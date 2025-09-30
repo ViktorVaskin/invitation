@@ -17,11 +17,6 @@
   --brand:#b86b77; --card:#ffffff;
   --shadow:0 10px 30px rgba(0,0,0,.08); --radius:18px;
   
-  /* Настройки параллакса для мобильных устройств */
-  --parallax-bg-size: 300%; /* Размер фона (300% = в 3 раза больше) */
-  --parallax-bg-position: -35%; /* Позиция центра (-40% = вверх, +40% = вниз) */
-  --parallax-bg-size-mobile: 330%; /* Размер для экранов ≤480px */
-  --parallax-bg-size-small: 400%; /* Размер для экранов ≤360px */
 }
 
 /* базовые */
@@ -380,37 +375,10 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   }
 }
 
-/* ====== iOS устройства ====== */
-/* Отключаем параллакс только на iOS устройствах */
-.ios-device .parallax {
-  background-attachment: scroll !important;
-}
-
 /* ====== Мобильные устройства ====== */
-/* JavaScript параллакс для мобильных устройств */
+/* Отключаем параллакс на всех мобильных устройствах */
 .mobile-device .parallax {
   background-attachment: scroll !important;
-  /* Настройки из CSS переменных */
-  background-size: var(--parallax-bg-size) auto;
-  background-position: center var(--parallax-bg-position);
-  /* GPU ускорение */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-/* Дополнительное увеличение для очень узких экранов */
-@media (max-width: 480px) {
-  .mobile-device .parallax {
-    background-size: var(--parallax-bg-size-mobile) auto;
-  }
-}
-
-@media (max-width: 360px) {
-  .mobile-device .parallax {
-    background-size: var(--parallax-bg-size-small) auto;
-  }
 }
 
 

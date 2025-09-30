@@ -87,5 +87,18 @@
       else { img.addEventListener('load', function(){ requestAnimationFrame(reveal); }, { once:true }); setTimeout(reveal, 2000); }
     })();
 
+    // Отключение параллакса на iOS
+    (function(){
+      function isIOS() {
+        return /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+               (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      }
+      
+      if (isIOS()) {
+        // Добавляем класс для iOS - CSS сам отключит параллакс
+        document.documentElement.classList.add('ios-device');
+      }
+    })();
+
 
     

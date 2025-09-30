@@ -53,7 +53,6 @@ html,body{
   text-align:center;
   
   /* iOS фиксы для плавной прокрутки */
-  -webkit-overflow-scrolling:touch;
 }
 img{max-width:100%;display:block}
 a{color:var(--brand);text-decoration:none;cursor:pointer}
@@ -71,15 +70,12 @@ section{padding:56px 16px} /* компактнее на мобилках */
 .hero__bg{position:absolute;inset:0;overflow:hidden}
 .hero__bg img{
   width:100%;height:100%;object-fit:cover;filter:brightness(.6) saturate(1.05);
-  opacity:0;transform:scale(1.03);
-  transition:opacity 1.6s ease,transform 2.4s ease;will-change:opacity,transform;
+  opacity:0;
+  transition:opacity 1.6s ease;
   /* iOS фиксы */
-  -webkit-transform:scale(1.03);
-  transform:scale(1.03);
 }
 .is-hero-loaded .hero__bg img{
-  opacity:1;transform:scale(1);
-  -webkit-transform:scale(1);
+  opacity:1;
 }
 .hero__content{position:relative;color:#faf0e6;padding:20px;z-index: 2;}
 .hero__names{font-family:"PlayfairDisplaySC",serif;font-size:clamp(40px,12vw,100px);font-weight:normal;margin:0 0 340px;letter-spacing:0.02em;opacity:0.95;font-style:italic}
@@ -129,10 +125,8 @@ section{padding:56px 16px} /* компактнее на мобилках */
 /* ---------- План мероприятия (вертикальный) ---------- */
 .program-list{display:grid;gap:16px;max-width:720px;margin:28px auto 0;text-align:left;padding:0 2px}
 .program-item{
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding:16px;
   border-radius:var(--radius);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -156,10 +150,8 @@ section{padding:56px 16px} /* компактнее на мобилках */
 
 /* Секция с информацией о зале */
 .hall-info-section{
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: var(--radius);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -222,10 +214,8 @@ section{padding:56px 16px} /* компактнее на мобилках */
 
 /* Секция "Как добраться" */
 .transport-section{
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: var(--radius);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -252,10 +242,8 @@ section{padding:56px 16px} /* компактнее на мобилках */
 /* ---------- Контакты ---------- */
 .contacts__grid{display:grid;grid-template-columns:1fr;gap:12px;justify-items:stretch}
 .contact{
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius:var(--radius);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   padding:16px;
@@ -294,10 +282,8 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   text-align:left;
 }
 .details-item{
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding:16px;
   border-radius:var(--radius);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -391,6 +377,8 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
     background-attachment: scroll; /* отключаем fixed на iOS */
     background-size: 240%; /* немного увеличиваем картинку */
     background-position: center;
+    -webkit-transform: translateZ(0); /* GPU ускорение */
+    transform: translateZ(0);
   }
 }
 

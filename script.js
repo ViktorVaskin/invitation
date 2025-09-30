@@ -87,5 +87,61 @@
       else { img.addEventListener('load', function(){ requestAnimationFrame(reveal); }, { once:true }); setTimeout(reveal, 2000); }
     })();
 
+    // Отключение параллакса на мобильных устройствах
+    (function(){
+      function isMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+               (navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
+      }
+      
+      if (isMobile()) {
+        // Добавляем класс для мобильных устройств - CSS отключит параллакс
+        document.documentElement.classList.add('mobile-device');
+        console.log('Mobile device detected, parallax disabled');
+      } else {
+        console.log('Desktop device, using CSS parallax');
+      }
+    })();
+
+    // Анимации при скролле
+    (function(){
+      function isElementInViewport(el) {
+        var rect = el.getBoundingClientRect();
+        return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+      }
+
+      function isElementPartiallyInViewport(el) {
+        var rect = el.getBoundingClientRect();
+        return rect.top < window.innerHeight && rect.bottom > 0;
+      }
+
+      function animateOnScroll() {
+        var elementsToAnimate = document.querySelectorAll('.title, .invite__text, .mini-cal, .countdown__title, .cd-numbers, .program-item, .hall-info-section, .transport-section, .contact, .details-item');
+        
+        elementsToAnimate.forEach(function(element) {
+          if (isElementPartiallyInViewport(element) && !element.classList.contains('animate-in')) {
+            element.classList.add('animate-in');
+          }
+        });
+      }
+
+      // Запускаем анимацию для элементов, которые уже видны при загрузке
+      setTimeout(animateOnScroll, 100);
+      
+      // Добавляем обработчик скролла с throttling
+      var scrollTimeout;
+      window.addEventListener('scroll', function() {
+        if (scrollTimeout) {
+          clearTimeout(scrollTimeout);
+        }
+        scrollTimeout = setTimeout(animateOnScroll, 10);
+      });
+    })();
+
 
     

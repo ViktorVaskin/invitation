@@ -16,6 +16,7 @@
   --bg:#fff7f2; --fg:#2a2a2a; --muted:#6f6f6f;
   --brand:#b86b77; --card:#ffffff;
   --shadow:0 10px 30px rgba(0,0,0,.08); --radius:18px;
+  
 }
 
 /* базовые */
@@ -60,7 +61,14 @@ section{padding:56px 16px} /* компактнее на мобилках */
 
 .title{
   font-family:"PlayfairDisplaySC",serif;font-weight:normal;
-  font-size:clamp(24px,7vw,52px);line-height:1.15;margin:0 0 12px;font-style:italic
+  font-size:clamp(24px,7vw,52px);line-height:1.15;margin:0 0 12px;font-style:italic;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+.title.animate-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 .subtitle{font-size:clamp(15px,4vw,20px);color:var(--muted);margin:0 0 24px;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-style:normal}
 
@@ -71,27 +79,67 @@ section{padding:56px 16px} /* компактнее на мобилках */
   width:100%;height:100%;object-fit:cover;filter:brightness(.6) saturate(1.05);
   opacity:0;
   transition:opacity 1.6s ease;
-  /* iOS фиксы */
+  /* iOS фиксы для стабильности */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 .is-hero-loaded .hero__bg img{
   opacity:1;
 }
+
+
 .hero__content{position:relative;color:#faf0e6;padding:20px;z-index: 2;}
-.hero__names{font-family:"PlayfairDisplaySC",serif;font-size:clamp(40px,12vw,100px);font-weight:normal;margin:0 0 340px;letter-spacing:0.02em;opacity:0.95;font-style:italic}
-.hero__date{font-family:"PlayfairDisplaySC",serif;font-size:clamp(32px,10vw,75px);font-weight:normal;margin:0;letter-spacing:0.08em;opacity:0.85;font-style:italic}
+.hero__names{
+  font-family:"PlayfairDisplaySC",serif;font-size:clamp(40px,12vw,100px);font-weight:normal;margin:0 0 340px;letter-spacing:0.02em;opacity:0.95;font-style:italic;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1.5s ease-out 0.5s forwards;
+}
+.hero__date{
+  font-family:"PlayfairDisplaySC",serif;font-size:clamp(32px,10vw,75px);font-weight:normal;margin:0;letter-spacing:0.08em;opacity:0.85;font-style:italic;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1.5s ease-out 1s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 0.95;
+    transform: translateY(0);
+  }
+}
+
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.25) 35%,rgba(0,0,0,.45));pointer-events:none;z-index: 1;}
 
 /* ---------- Приглашение + календарь + таймер ---------- */
 #calendar{min-height:100vh;display:flex;align-items:center}
 
-.invite__text{font-family:"Alexander",cursive;max-width:760px;margin:0 auto 18px;color:var(--muted);font-size:clamp(14px,6vw,30px);font-style:normal}
+.invite__text{
+  font-family:"Alexander",cursive;max-width:760px;margin:0 auto 18px;color:var(--muted);font-size:clamp(14px,6vw,30px);font-style:normal;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+.invite__text.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
 .divider{width:100%;max-width:1000px;height:40px;margin:16px auto 20px;color:var(--muted)}
 .divider img{width:100%;height:100%;filter:opacity(0.6)}
 
 /* Мини-календарь — пиксельное совпадение заголовков и чисел, центр */
 .mini-cal{
   --sz: clamp(32px, 10vw, 46px);
-  display:grid;gap:10px;margin:0 auto 28px;width:fit-content;justify-items:center
+  display:grid;gap:10px;margin:0 auto 28px;width:fit-content;justify-items:center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+.mini-cal.animate-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 .mini-cal__header{font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--fg);font-style:normal;font-size:clamp(14px,6vw,30px)}
 .mini-cal__dow-grid,.mini-cal__num-grid{
@@ -107,19 +155,37 @@ section{padding:56px 16px} /* компактнее на мобилках */
   border:1px solid rgba(0,0,0,.08);border-radius:10px;background:transparent;font-weight:600;font-style:normal
 }
 .mini-cal__cell--empty{border-color:transparent}
-.mini-cal__cell--mark{border:2px solid var(--brand);color:var(--brand);position:relative}
+.mini-cal__cell--mark{
+  border:2px solid var(--brand);color:var(--brand);position:relative;
+  animation: heartbeat 2s ease-in-out infinite;
+}
 .mini-cal__cell--mark::after{
-  content:"♥";position:absolute;bottom:5px;right:6px;opacity:.35;font-size:14px;color:var(--brand)
+  content:"♥";position:absolute;bottom:5px;right:6px;opacity:.35;font-size:14px;color:var(--brand);
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 /* Таймер — одна строка на мобилках, мягкая типографика */
-.countdown__title{font-family:"PlayfairDisplaySC",serif;letter-spacing:.12em;text-transform:uppercase;margin:24px 0 6px;font-style:normal;font-size:clamp(14px,6vw,30px)}
+.countdown__title{
+  font-family:"PlayfairDisplaySC",serif;letter-spacing:.12em;text-transform:uppercase;margin:24px 0 6px;font-style:normal;font-size:clamp(14px,6vw,30px);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease-out 0.5s forwards;
+}
 .cd-numbers{
-  display:flex;gap:clamp(14px,6vw,28px);justify-content:center;align-items:flex-end;flex-wrap:nowrap
+  display:flex;gap:clamp(14px,6vw,28px);justify-content:center;align-items:flex-end;flex-wrap:nowrap;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease-out 0.8s forwards;
 }
 .cd-box{text-align:center;min-width:72px}
 .cd-num{font-size:clamp(34px,12vw,90px);font-weight:500;line-height:1;font-style:normal}
 .cd-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px;font-style:normal}
+
 
 /* ---------- План мероприятия (вертикальный) ---------- */
 .program-list{display:grid;gap:16px;max-width:720px;margin:28px auto 0;text-align:left;padding:0 2px}
@@ -134,6 +200,13 @@ section{padding:56px 16px} /* компактнее на мобилках */
   gap:12px;
   font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   font-style:normal;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+.program-item.animate-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 .program-icon{flex:0 0 40px;width:clamp(32px,10vw,48px);height:clamp(32px,10vw,48px);color:var(--fg)}
 #program .program-icon{color:#faf0e6} /* светлый цвет для параллакса */
@@ -157,6 +230,13 @@ section{padding:56px 16px} /* компактнее на мобилках */
   text-align: center;
   font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   font-style: normal;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+.hall-info-section.animate-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hall-info__title{
@@ -203,12 +283,7 @@ section{padding:56px 16px} /* компактнее на мобилках */
   color: var(--brand);
   text-decoration: underline;
   cursor: pointer;
-  transition: color 0.2s ease;
   font-weight: 500;
-}
-.location__address:hover{
-  color: var(--fg);
-  text-decoration: none;
 }
 
 /* Секция "Как добраться" */
@@ -222,6 +297,13 @@ section{padding:56px 16px} /* компактнее на мобилках */
   text-align: center;
   font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   font-style: normal;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+.transport-section.animate-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 .transport__title{
   font-family: "Playfair Display", serif;
@@ -248,12 +330,25 @@ section{padding:56px 16px} /* компактнее на мобилках */
   padding:16px;
   font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   font-style:normal;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+.contact.animate-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 .contact h3{font-family:"Playfair Display",serif;font-weight:700}
 
 /* ---------- Тост ---------- */
-.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--fg);color:#fff;padding:6px 10px;border-radius:999px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .25s ease;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:13px;font-style:normal}
-.toast--show{opacity:1}
+.toast{
+  position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--fg);color:#fff;padding:6px 10px;border-radius:999px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:all 0.3s ease;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:13px;font-style:normal;
+  transform: translateX(-50%) translateY(20px);
+}
+.toast--show{
+  opacity:1;
+  transform: translateX(-50%) translateY(0);
+}
 
 /* ---------- Подвал ---------- */
 footer{padding:32px 16px;color:var(--muted);text-align:center}
@@ -291,6 +386,13 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   gap:12px;
   font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   font-style:normal;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+.details-item.animate-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 .details-icon{
   flex:0 0 36px;
@@ -311,7 +413,7 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
 /* ===== ФИКСИРОВАННЫЙ ПАРАЛЛАКС ===== */
 .parallax{
   position: relative;
-  background-attachment: fixed; /* отключаем fixed на iOS */
+  background-attachment: fixed;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -370,14 +472,21 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   }
 }
 
-/* ====== iOS устройства ====== */
-@supports (-webkit-touch-callout: none) {
-  .parallax{
-    background-attachment: scroll; /* отключаем fixed на iOS */
-    background-size: 240%; /* немного увеличиваем картинку */
-    background-position: center;
-    -webkit-transform: translateZ(0); /* GPU ускорение */
-    transform: translateZ(0);
+/* ====== Мобильные устройства ====== */
+/* Отключаем параллакс на всех мобильных устройствах */
+.mobile-device .parallax {
+  background-attachment: scroll !important;
+}
+
+/* Оптимизация анимаций для мобильных устройств */
+@media (max-width: 768px) {
+  /* Отключаем некоторые анимации на очень слабых устройствах */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 

@@ -475,7 +475,7 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   .mini-cal__cell--mark::after{
     bottom: 2px;
     right: 3px;
-    font-size: 13px;
+    font-size: 12px;
     opacity: 0.35;
   }
 }

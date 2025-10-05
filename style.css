@@ -160,7 +160,7 @@ section{padding:56px 16px} /* компактнее на мобилках */
   animation: heartbeat 2s ease-in-out infinite;
 }
 .mini-cal__cell--mark::after{
-  content:"♥";position:absolute;bottom:5px;right:6px;opacity:.35;font-size:14px;color:var(--brand);
+  content:"♥";position:absolute;bottom:3px;right:4px;opacity:.35;font-size:15px;color:var(--brand);
   animation: heartbeat 2s ease-in-out infinite;
 }
 
@@ -469,6 +469,14 @@ footer{padding:32px 16px;color:var(--muted);text-align:center}
   .parallax{
     padding: 60px 0;
     min-height: 50vh;
+  }
+  
+  /* Оптимизация сердечка в календаре для мобильных устройств */
+  .mini-cal__cell--mark::after{
+    bottom: 2px;
+    right: 3px;
+    font-size: 13px;
+    opacity: 0.35;
   }
 }
 
